@@ -83,9 +83,9 @@
   </div>
   <div id="message">Anh biết mà 💞 Em chính là định mệnh của anh 💖</div>
 
-  <!-- 🎵 Nhạc nền tự phát từ khi mở trang -->
+  <!-- 🎵 Nhạc nền tự phát -->
   <audio id="bgMusic" autoplay loop>
-    <source src="https://www.youtube.com/watch?v=P2dEZT9-GDA" type="audio/mpeg">
+    <source src="https://cdn.pixabay.com/download/audio/2023/09/06/audio_6b4b9e6e45.mp3" type="audio/mpeg">
   </audio>
 
   <script>
@@ -94,7 +94,6 @@
     const message = document.getElementById("message");
     const music = document.getElementById("bgMusic");
 
-    // Một số trình duyệt chặn autoplay — bật nếu người dùng có tương tác đầu tiên
     document.addEventListener("click", () => {
       music.play().catch(() => {});
     }, { once: true });
@@ -102,12 +101,10 @@
     yesBtn.addEventListener("click", () => {
       message.style.opacity = 1;
       setTimeout(() => {
-        // 👉 ĐỔI LINK FACEBOOK CỦA BẠN TẠI DÒNG NÀY
         window.location.href = "https://www.facebook.com/hieu.duong.513245";
       }, 3000);
     });
 
-    // Nút "Rời đi" chạy trốn khi rê chuột vào
     noBtn.addEventListener("mouseover", () => {
       const x = Math.random() * (window.innerWidth - 150);
       const y = Math.random() * (window.innerHeight - 150);
