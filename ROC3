@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thế giới của thầy 💞</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(-45deg, #000000, #1a0033, #6600ff, #ff0099);
+      background-size: 400% 400%;
+      animation: gradient 6s ease infinite;
+      font-family: 'Poppins', sans-serif;
+      color: white;
+      overflow: hidden;
+    }
+
+    @keyframes gradient {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    /* Dòng chữ chạy */
+    .marquee {
+      position: fixed;
+      top: 10px;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      font-size: 1.3em;
+      text-shadow: 0 0 15px #ff66cc;
+    }
+
+    .marquee span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: marquee 12s linear infinite;
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-100%); }
+    }
+
+    h1 {
+      font-size: 2.3em;
+      margin-bottom: 50px;
+      text-shadow: 0 0 25px #ff66cc, 0 0 50px #ff0099;
+      animation: pulse 2s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { transform: scale(1); }
+      to { transform: scale(1.05); }
+    }
+
+    .buttons {
+      display: flex;
+      gap: 60px;
+      position: relative;
+    }
+
+    button {
+      padding: 15px 35px;
+      font-size: 1.1em;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      color: white;
+      font-weight: 600;
+      transition: 0.3s;
+      user-select: none;
+    }
+
+    #yesBtn {
+      background: linear-gradient(45deg, #ff00cc, #3333ff);
+      box-shadow: 0 0 25px #ff00cc;
+    }
+
+    #yesBtn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 35px #ff33cc;
+    }
+
+    #noBtn {
+      background: linear-gradient(45deg, #444, #111);
+      box-shadow: 0 0 15px #000;
+      position: relative;
+    }
+
+    #message {
+      margin-top: 40px;
+      font-size: 1.6em;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    /* Ô nhập lời yêu thương */
+    #loveInputBox {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 30px;
+    }
+
+    input {
+      padding: 10px 15px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      font-size: 1em;
+      text-align: center;
+      margin-bottom: 15px;
+      width: 250px;
+    }
+
+    #sendBtn {
+      background: linear-gradient(45deg, #ff0099, #6600ff);
+      box-shadow: 0 0 20px #ff33cc;
+    }
+
+    #sendBtn:hover {
+      transform: scale(1.1);
+    }
+
+    /* Hiệu ứng tim bay */
+    .heart {
+      position: fixed;
+      color: #ff66cc;
+      animation: fly 3s linear forwards;
+      font-size: 20px;
+    }
+
+    @keyframes fly {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-200px) scale(2); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="marquee"><span>💌 Gửi lời yêu thương đến trò 💌 Gửi lời yêu thương đến trò 💌</span></div>
+
+  <h1>Thế giới của thầy 💞</h1>
+
+  <div class="buttons">
+    <button id="yesBtn">Gửi lời yêu thương tới thầy 💘</button>
+    <button id="noBtn">Em không thích thầy 😢</button>
+  </div>
+
+  <div id="loveInputBox">
+    <input id="loveInput" type="text" placeholder="Nhập lời yêu thương...">
+    <button id="sendBtn">Gửi 💌</button>
+  </div>
+
+  <div id="message">Thầy biết mà ahihi 💖</div>
+
+  <!-- 🎵 Nhạc nền -->
+  <audio id="bgMusic" autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2023/09/06/audio_6b4b9e6e45.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- 🔊 Âm thanh “tạch” -->
+  <audio id="clickSound">
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_8e7b5e39e4.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const message = document.getElementById("message");
+    const loveBox = document.getElementById("loveInputBox");
+    const loveInput = document.getElementById("loveInput");
+    const sendBtn = document.getElementById("sendBtn");
+    const clickSound = document.getElementById("clickSound");
+    const music = document.getElementById("bgMusic");
+
+    // Phát nhạc nền khi người dùng tương tác lần đầu
+    document.addEventListener("click", () => {
+      music.play().catch(() => {});
+    }, { once: true });
+
+    // Khi bấm "Gửi lời yêu thương tới thầy"
+    yesBtn.addEventListener("click", () => {
+      loveBox.style.display = "flex";
+      message.style.opacity = 0;
+    });
+
+    // Khi rê chuột vào "Em không thích thầy"
+    noBtn.addEventListener("mouseover", () => {
+      clickSound.currentTime = 0;
+      clickSound.play();
+
+      const btnWidth = noBtn.offsetWidth;
+      const btnHeight = noBtn.offsetHeight;
+      const yesRect = yesBtn.getBoundingClientRect();
+
+      let x, y;
+      let safeDistance = 150;
+
+      do {
+        x = Math.random() * (window.innerWidth - btnWidth - 20);
+        y = Math.random() * (window.innerHeight - btnHeight - 20);
+      } while (
+        Math.abs(x - yesRect.left) < safeDistance &&
+        Math.abs(y - yesRect.top) < safeDistance
+      );
+
+      noBtn.style.position = "absolute";
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+    });
+
+    // Khi người chơi nhập và gửi lời yêu thương
+    sendBtn.addEventListener("click", () => {
+      loveInput.value = "Em thích thầy 💞";
+      loveBox.style.display = "none";
+      message.style.opacity = 1;
+      spawnHearts(15);
+    });
+
+    // Hiệu ứng tim bay
+    function spawnHearts(count) {
+      for (let i = 0; i < count; i++) {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.textContent = "💖";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.bottom = "0px";
+        heart.style.fontSize = Math.random() * 20 + 20 + "px";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 3000);
+      }
+    }
+  </script>
+</body>
+</html>
