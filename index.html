@@ -35,7 +35,8 @@
 
     .buttons {
       display: flex;
-      gap: 30px;
+      gap: 50px; /* khoảng cách xa hơn giữa 2 nút */
+      position: relative;
     }
 
     button {
@@ -47,6 +48,7 @@
       color: white;
       font-weight: 600;
       transition: 0.3s;
+      user-select: none;
     }
 
     #yesBtn {
@@ -88,16 +90,24 @@
     <source src="https://cdn.pixabay.com/download/audio/2023/09/06/audio_6b4b9e6e45.mp3" type="audio/mpeg">
   </audio>
 
+  <!-- 🔊 Âm thanh “tạch” khi rê vào nút Rời đi -->
+  <audio id="clickSound">
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_8e7b5e39e4.mp3" type="audio/mpeg">
+  </audio>
+
   <script>
     const yesBtn = document.getElementById("yesBtn");
     const noBtn = document.getElementById("noBtn");
     const message = document.getElementById("message");
     const music = document.getElementById("bgMusic");
+    const clickSound = document.getElementById("clickSound");
 
+    // Cho phép phát nhạc nền sau khi người dùng tương tác lần đầu
     document.addEventListener("click", () => {
       music.play().catch(() => {});
     }, { once: true });
 
+    // Khi bấm "Ở lại với anh 💘"
     yesBtn.addEventListener("click", () => {
       message.style.opacity = 1;
       setTimeout(() => {
@@ -105,9 +115,26 @@
       }, 3000);
     });
 
+    // Khi rê chuột vào "Rời đi 😢"
     noBtn.addEventListener("mouseover", () => {
-      const x = Math.random() * (window.innerWidth - 150);
-      const y = Math.random() * (window.innerHeight - 150);
+      clickSound.currentTime = 0;
+      clickSound.play();
+
+      const btnWidth = noBtn.offsetWidth;
+      const btnHeight = noBtn.offsetHeight;
+      const yesRect = yesBtn.getBoundingClientRect();
+
+      let x, y;
+      let safeDistance = 150; // khoảng cách tối thiểu với nút "Ở lại"
+
+      do {
+        x = Math.random() * (window.innerWidth - btnWidth - 20);
+        y = Math.random() * (window.innerHeight - btnHeight - 20);
+      } while (
+        Math.abs(x - yesRect.left) < safeDistance &&
+        Math.abs(y - yesRect.top) < safeDistance
+      );
+
       noBtn.style.position = "absolute";
       noBtn.style.left = `${x}px`;
       noBtn.style.top = `${y}px`;
