@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Giới thiệu bản thân - Hiếu Dương</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@400;600&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(-45deg, #000000, #1a1a1a, #3d0075, #ff005c);
+      background-size: 400% 400%;
+      animation: gradientBG 10s ease infinite;
+      font-family: 'Poppins', sans-serif;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.08);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 20px;
+      padding: 40px;
+      width: 400px;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(255, 0, 100, 0.6);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 50px rgba(255, 0, 200, 0.8);
+    }
+
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.5em;
+      margin-bottom: 15px;
+      background: linear-gradient(90deg, #ff00cc, #3333ff, #ffcc00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      from {text-shadow: 0 0 10px #ff00cc, 0 0 20px #ff00cc;}
+      to {text-shadow: 0 0 30px #00ffff, 0 0 60px #00ffff;}
+    }
+
+    p {
+      font-size: 1.1em;
+      margin: 10px 0;
+      color: #e6e6e6;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 25px;
+      background: linear-gradient(45deg, #ff0066, #6600ff);
+      border: none;
+      border-radius: 30px;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px #ff00ff, 0 0 30px #6600ff;
+    }
+
+    .fire {
+      position: absolute;
+      bottom: -50px;
+      width: 100%;
+      height: 150px;
+      background: url('https://i.ibb.co/VBzV4hV/fire.gif') center/cover no-repeat;
+      opacity: 0.4;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Dương Đức Hiếu</h1>
+    <p>🔥 Lập trình viên trẻ đam mê công nghệ & sáng tạo.</p>
+    <p>🎯 Sở thích: Code, thiết kế web, anime và khám phá AI.</p>
+    <p>💬 Châm ngôn: "Không thử thì làm sao biết được giới hạn!"</p>
+    <a href="#" class="btn">Liên hệ</a>
+  </div>
+
+  <div class="fire"></div>
+
+</body>
+</html>
